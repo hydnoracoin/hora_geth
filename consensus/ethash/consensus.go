@@ -729,6 +729,11 @@ func accumulateRewards(config *params.ChainConfig, state *state.StateDB, header 
                 developmentReward = big.NewInt(120e+15)
 		horaReward = big.NewInt(120e+15)
 	}
+	 if config.IsConstantinople(header.Number) {
+          if (header.Number.Int64() <= 380000) {
+        blockReward = ConstantinopleBlockReward
+          }
+    }
 	
 	// Accumulate the rewards for the miner and any included uncles
 	reward := new(big.Int).Set(blockReward)
